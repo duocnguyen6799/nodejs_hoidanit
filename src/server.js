@@ -1,6 +1,8 @@
 
 import express from 'express';
 import configViewEngine from './configs/viewEngine';
+import initWebRoute from './route/web';
+
 require('dotenv').config();
 
 // const path = require('path');
@@ -11,15 +13,7 @@ const port = process.env.PORT || 3000;
 console.log('>>> check port: ', port);
 
 configViewEngine(app);
-
-app.get('/', (req, res) => {
-    // res.sendFile(path.join(__dirname, './index.html'));
-    res.render('./index.ejs'); //Auto find the file any in views folder. config in viewEngine
-});
-
-app.get('/about', (req, res) => {
-    res.send(`This is an about page`)
-})
+initWebRoute(app);
 
 app.listen(port, () => {
     console.log(`App listening at https://localhost:${port}`);
